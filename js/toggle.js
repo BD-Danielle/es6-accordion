@@ -39,18 +39,20 @@ class Accordion{
   play(){
     var items = this.element.children;
     var _this = this;
-    for(var i = 0; i < items.length; i++){
+    var idx;
+    for(let i = 0; i < items.length; i++){
       items[i].onclick = function(){
-        Array.prototype.slice.call(this.parentNode.children).forEach(function(e, i){
+        Array.prototype.slice.call(this.parentNode.children).forEach(function(e, _i){
+          if(idx == i) return;
           e.children[0].children[0].classList.replace('fa-minus', 'fa-plus');
           e.children[1].style.display = 'none';
         })
         _this.toggleClass(this.children[0].children[0]);
         _this.toggleContent(this.children[1]);
         window.scroll(0, this.offsetTop);
+        idx = i;
       }
     }
-    
   }
 };
 window.addEventListener('DOMContentLoaded', function(){ new Accordion('[data-toggle-list]'); })
