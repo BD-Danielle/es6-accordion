@@ -22,9 +22,9 @@ class Accordion{
   classes = 'closed open';
   constructor(selector){
     // Default values
-    var dom = Array.prototype.slice.call(document.querySelectorAll(selector));
-    var len = dom ? dom.length : 0;
-    for(var i = 0; i < len; i++){
+    let dom = Array.prototype.slice.call(document.querySelectorAll(selector));
+    let len = dom ? dom.length : 0;
+    for(let i = 0; i < len; i++){
       this[i] = dom[i];
       this.element = this[i];
       this.play();
@@ -37,9 +37,9 @@ class Accordion{
     ele.offsetHeight == 0 ? ele.style.display = 'block' : ele.style.display = 'none';
   }
   play(){
-    var items = this.element.children;
-    var _this = this;
-    var idx;
+    let items = this.element.children;
+    let _this = this;
+    let idx;
     for(let i = 0; i < items.length; i++){
       items[i].onclick = function(){
         Array.prototype.slice.call(this.parentNode.children).forEach(function(e, _i){
