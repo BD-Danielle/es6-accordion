@@ -17,7 +17,7 @@
  */
 
  // Create a class
-class Accordion{
+ class Accordion{
   // **********Static variables********** //
   classes = 'closed open';
   constructor(selector){
