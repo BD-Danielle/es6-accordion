@@ -29,7 +29,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // Create a class
 var Accordion = function () {
   // **********Static variables********** //
-  function Accordion(selector, bool) {
+  function Accordion(selector, bool, index) {
     _classCallCheck(this, Accordion);
 
     this.bool = false;
@@ -39,7 +39,7 @@ var Accordion = function () {
     for (var i = 0; i < len; i++) {
       this[i] = dom[i];
       this.element = this[i];
-      this.play(bool);
+      this.play(bool, index);
     }
   }
 
@@ -65,11 +65,11 @@ var Accordion = function () {
     }
   }, {
     key: 'play',
-    value: function play(bool) {
+    value: function play(bool, index) {
       var items = this.element.children;
       var _this = this;
       var idx = void 0;
-
+      setTimeout(function(){ if (index !== undefined) items[index - 1].click(); }, 100);
       var _loop = function _loop(i) {
         items[i].onclick = function () {
           Array.prototype.slice.call(this.parentNode.children).forEach(function (e, _i) {

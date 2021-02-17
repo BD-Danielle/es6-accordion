@@ -23,15 +23,14 @@
  // Create a class
  class Accordion{
   // **********Static variables********** //
-  constructor(selector, bool){
-    this.bool = false;
+  constructor(selector, bool, index){
     // Default values
     let dom = Array.prototype.slice.call(document.querySelectorAll(selector));
     let len = dom ? dom.length : 0;
     for(let i = 0; i < len; i++){
       this[i] = dom[i];
       this.element = this[i];
-      this.play(bool);
+      this.play(bool, index);
     }
   }
   replace(ele, a, b) {
@@ -48,10 +47,11 @@
   toggleContent(ele){
     ele.offsetHeight == 0 ? ele.style.display = 'block' : ele.style.display = 'none';
   }
-  play(bool){
+  play(bool, index){
     let items = this.element.children;
     let _this = this;
     let idx;
+    setTimeout(function(){ if (index !== undefined) items[index - 1].click(); }, 100);
     for(let i = 0; i < items.length; i++){
       items[i].onclick = function(){
         Array.prototype.slice.call(this.parentNode.children).forEach(function(e, _i){
