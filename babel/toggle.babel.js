@@ -79,7 +79,7 @@ var Accordion = function () {
           });
           _this.toggleClass(this.children[0].lastElementChild);
           _this.toggleContent(this.children[1]);
-          window.scroll(0, this.offsetTop);
+          // window.scroll(0, this.offsetTop);
           idx = i;
         };
       };
