@@ -34,15 +34,15 @@
     }
   }
   replace(ele, a, b) {
-    if (ele.contains(a)) {
-        ele.add(b);
-        ele.remove(a);
-        return true;
+    if (Array.from(ele).indexOf(a)) {
+      ele.add(b);
+      ele.remove(a);
+      return true;
     }
     return false;
   }
   toggleClass(ele){
-    ele.classList.contains('fa-plus') ? this.replace(ele.classList, 'fa-plus', 'fa-minus') : this.replace(ele.classList, 'fa-minus', 'fa-plus');
+    Array.from(ele.classList).indexOf('fa-plus') ? this.replace(ele.classList, 'fa-plus', 'fa-minus') : this.replace(ele.classList, 'fa-minus', 'fa-plus');
   }
   toggleContent(ele){
     ele.offsetHeight == 0 ? ele.style.display = 'block' : ele.style.display = 'none';
