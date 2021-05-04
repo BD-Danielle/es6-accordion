@@ -58,7 +58,11 @@ class Accordion {
       items[i].onclick = function () {
         Array.prototype.slice.call(this.parentNode.children).forEach(function (e, _i) {
           if (idx == i || bool == false) return;
-          e.children[0].lastChild.classList.replace('fa-minus', 'fa-plus');
+          /* 
+            e.children[0].lastChild.classList.replace('fa-minus', 'fa-plus');
+            fuck IE 
+          */
+          _this.replace(e.children[0].lastChild.classList, 'fa-minus', 'fa-plus');
           e.children[1].style.display = 'none';
         });
         _this.toggleClass(this.children[0].lastChild);
