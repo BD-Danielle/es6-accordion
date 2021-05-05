@@ -45,7 +45,7 @@ var Accordion = function () {
   _createClass(Accordion, [{
     key: 'replace',
     value: function replace(ele, a, b) {
-      if (Array.from(ele).indexOf(a)) {
+      if (Array.from(ele).indexOf(a) !== -1) {
         ele.add(b);
         ele.remove(a);
         return true;
@@ -55,7 +55,7 @@ var Accordion = function () {
   }, {
     key: 'toggleClass',
     value: function toggleClass(ele) {
-      Array.from(ele.classList).indexOf('fa-plus') ? this.replace(ele.classList, 'fa-plus', 'fa-minus') : this.replace(ele.classList, 'fa-minus', 'fa-plus');
+      Array.from(ele.classList).indexOf('fa-plus') !== -1 ? this.replace(ele.classList, 'fa-plus', 'fa-minus') : this.replace(ele.classList, 'fa-minus', 'fa-plus');
     }
   }, {
     key: 'toggleContent',
