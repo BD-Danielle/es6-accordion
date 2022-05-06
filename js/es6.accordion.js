@@ -15,12 +15,6 @@ class Accordion{
     this.selector = selector;
     this.toggle(auto, index);
   }
-  get index(){
-    return 0;
-  }
-  set index(value){
-    this.index = value;
-  }
   get items(){
     return this.selector.querySelectorAll("[data-toggle-item]");
   }
@@ -30,35 +24,35 @@ class Accordion{
   get contents(){
     return this.selector.querySelectorAll("[data-toggle-content]");
   }
-  get bool(){
-    return false;
-  }
-  set bool(value){
-    this.bool = value;
-  }
   toggle(auto, index){
-    let btn, content;
+    let btn, content, contents;
     if(index) {
       this.buttons[index-1].setAttribute("data-toggle-btn", true);
       this.contents[index-1].style.display="block";
     }
+    contents = this.contents;
     for(let i=0; i<this.items.length; i++){
+      this.items[i].bool = false;
+      this.items[i].index = i;
       this.items[i].onclick=function(){
         btn = this.querySelector("[data-toggle-btn]");
         content = this.querySelector("[data-toggle-content]");
-        console.log('index vs this.index', index, this.index);
-        if(!this.index){
-          this.index = index;
-          console.log('index vs this.index: ', index, this.index);
+        if(auto) contents.forEach(c=>c.style.display="none");
+        if(this.index == index - 1) {
           btn.setAttribute("data-toggle-btn", this.bool);
-          content.style.display = this.bool ? "block": "none" ;
+          content.style.display = this.bool ? "block": "none";
           this.bool = !this.bool;
-          this.index = 0;
           return;
         }
-        this.bool = !this.bool;
-        btn.setAttribute("data-toggle-btn", this.bool);
-        content.style.display = this.bool ? "block": "none";
+        if(!this.bool){
+          this.bool = true;
+          btn.setAttribute("data-toggle-btn", this.bool);
+          content.style.display = this.bool ? "block": "none";
+        }else{
+          this.bool = false;
+          btn.setAttribute("data-toggle-btn", this.bool);
+          content.style.display = this.bool ? "block": "none";
+        }
       }
     }
   }
