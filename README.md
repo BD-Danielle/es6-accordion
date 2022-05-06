@@ -1,19 +1,27 @@
-# Babel setup
-### 第一步：在開發目錄下，初始化npm，並輸入相關屬性值，例如創建者署名
+# Accordion
+## 手風琴套件，對於內文可折疊或展開。
+
+## 必要條件：
+### Accordion 不依賴原生jQuery，引用之前無需載入jQuery
 ```
-npm init
+<script src="./js/es6.accordion.js">
 ```
-### 第二步：touch一個副檔名為babelrc的檔案，並建立內容如下：
+
+## 參數配置：
+### 在父級創建屬性節點 data-toggle-list
 ```
-{
-  "presets": ["es2015", "stage-2"]
-}
+<ul class="list" data-toggle-list>
+  <li class="item">
+    <button class="w-100 p-3 d-flex justify-content-between text-white">YouTube 是什麼？<i
+        class="fas fa-plus"></i></button>
+    <div class="content p-3">源自美國的影片分享網站，也是目前全球最大的影片搜尋和分享平臺，讓使用者上載、觀看、分享及評論影片。</div>
+  </li>
+  <li>.......</li>
+</ul>
 ```
-### 第三步：安裝所需的套件，無需安裝至 --save-dev
+### 建立物件，行參一：為目標節點(@String)，行參二：為行為導向 屬性值為 true 可自動關閉，false 則為手動關閉(@Boolean)，行參三：為預設展開下標值(@Number)。
 ```
-npm install babel-cli babel-register babel-preset-es2015 babel-preset-stage-2
-```
-### 第四步：babel你指定的檔案，並輸出至指定位置：
-```
-babel peekaboo.js -o babel/peekaboo.babel.js
+<script>
+  window.addEventListener('DOMContentLoaded', function(){ new Accordion('[data-toggle-list]', true, 1); })
+</script>
 ```
