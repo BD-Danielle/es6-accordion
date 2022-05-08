@@ -24,8 +24,8 @@ class Accordion{
   get contents(){
     return this.selector.querySelectorAll("[data-toggle-content]");
   }
-  toggleClass(classList, a, b){
-    if([...classList].indexOf(a) == -1){
+  toggleClass(classList, a, b, bool){
+    if(!bool){
       classList.add(a);
       classList.remove(b);
       return;
@@ -38,42 +38,39 @@ class Accordion{
     contents = this.contents;
     buttons = this.buttons;
     buttons.forEach(c=>c.setAttribute("data-toggle-btn", false));
-    if(index) {
+    if(!!index) {
       buttons[index-1].setAttribute("data-toggle-btn", true);
       contents[index-1].style.display="block";
-      this.toggleClass(buttons[index-1].children[0].classList, "fa-minus", "fa-plus");
+      this.toggleClass(buttons[index-1].children[0].classList, "fa-plus", "fa-minus", true);
     }
     for(let i=0; i<this.items.length; i++){
       this.items[i].bool = false;
       this.items[i].index = i;
+      this.items[i].times = 0;
       this.items[i].onclick=function(){
         btn = this.children[0];
         content = this.children[1];
+        this.times+=1;
         if(auto) {
           contents.forEach(c=>c.style.display="none");
           buttons.forEach(c=>{
-            if(c.getAttribute("data-toggle-btn")=="true") self_toggle.toggleClass(c.children[0].classList, "fa-minus", "fa-plus");
+            self_toggle.toggleClass(c.children[0].classList, "fa-plus", "fa-minus", false);
             c.setAttribute("data-toggle-btn", false);
           })
         }
         if(this.index == index - 1) {
+          this.bool = this.times == 1 ? false: !this.bool;
           btn.setAttribute("data-toggle-btn", this.bool);
-          self_toggle.toggleClass(btn.children[0].classList, "fa-plus", "fa-minus");
+          self_toggle.toggleClass(btn.children[0].classList, "fa-plus", "fa-minus", this.bool);
           content.style.display = this.bool ? "block": "none";
-          this.bool = !this.bool;
+          console.log('this.bool: ', this.bool);
           return;
         }
-        if(!this.bool){
-          this.bool = true;
-          btn.setAttribute("data-toggle-btn", this.bool);
-          self_toggle.toggleClass(btn.children[0].classList, "fa-minus", "fa-plus");
-          content.style.display = this.bool ? "block": "none";
-        }else{
-          this.bool = false;
-          btn.setAttribute("data-toggle-btn", this.bool);
-          self_toggle.toggleClass(btn.children[0].classList, "fa-plus", "fa-minus");
-          content.style.display = this.bool ? "block": "none";
-        }
+        this.bool = this.times%2 == 0 && btn.getAttribute("data-toggle-btn") == "false" ? false: true;
+        btn.setAttribute("data-toggle-btn", this.bool);
+        self_toggle.toggleClass(btn.children[0].classList, "fa-plus", "fa-minus", this.bool);
+        content.style.display = this.bool ? "block": "none";
+        console.log('this.times: ', this.times);
       }
     }
   }
