@@ -47,7 +47,6 @@ class Accordion{
       this.toggleClass(buttons[index-1].children[0].classList, cls[0], cls[1], items[index-1].display);
     }
     for(let i=0; i<items.length; i++){
-      items[i].index = i;
       items[i].onclick=function(){
         btn = this.children[0];
         content = this.children[1];

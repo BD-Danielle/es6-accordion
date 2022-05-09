@@ -64,7 +64,6 @@ var Accordion = function () {
         this.toggleClass(buttons[index - 1].children[0].classList, cls[0], cls[1], items[index - 1].display);
       }
       for (var i = 0; i < items.length; i++) {
-        items[i].index = i;
         items[i].onclick = function () {
           var _this = this;
 
