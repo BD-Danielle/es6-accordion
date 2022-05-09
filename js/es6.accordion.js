@@ -10,7 +10,7 @@
  */
 let self_toggle;
 class Accordion{
-  constructor(selector, auto=false, index=0, cls){
+  constructor(selector, auto=false, index=0, cls=["fa-plus", "fa-minus"]){
     self_toggle = this;
     this.selector = selector;
     this.play(auto, index, cls);
