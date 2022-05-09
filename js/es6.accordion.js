@@ -13,7 +13,7 @@ class Accordion{
   constructor(selector, auto=false, index=0, cls){
     self_toggle = this;
     this.selector = selector;
-    this.toggle(auto, index, cls);
+    this.play(auto, index, cls);
   }
   get items(){
     return this.selector.querySelectorAll("[data-toggle-item]");
@@ -33,7 +33,7 @@ class Accordion{
     classList.add(a);
     classList.remove(b);
   }
-  toggle(auto, index, cls){
+  play(auto, index, cls){
     let btn, content, buttons, contents, items;
     contents = this.contents;
     buttons = this.buttons;
