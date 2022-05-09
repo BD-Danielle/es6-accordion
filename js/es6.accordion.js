@@ -10,10 +10,10 @@
  */
 let self_toggle;
 class Accordion{
-  constructor(selector, auto=false, index=0){
+  constructor(selector, auto=false, index=0, cls){
     self_toggle = this;
     this.selector = selector;
-    this.toggle(auto, index);
+    this.toggle(auto, index, cls);
   }
   get items(){
     return this.selector.querySelectorAll("[data-toggle-item]");
@@ -33,7 +33,7 @@ class Accordion{
     classList.add(a);
     classList.remove(b);
   }
-  toggle(auto, index){
+  toggle(auto, index, cls){
     let btn, content, buttons, contents, items;
     contents = this.contents;
     buttons = this.buttons;
@@ -44,7 +44,7 @@ class Accordion{
       items[index-1].display=true;
       buttons[index-1].setAttribute("data-toggle-btn", items[index-1].display);
       contents[index-1].style.display=items[index-1].display? "block": "none";
-      this.toggleClass(buttons[index-1].children[0].classList, "fa-plus", "fa-minus", items[index-1].display);
+      this.toggleClass(buttons[index-1].children[0].classList, cls[0], cls[1], items[index-1].display);
     }
     for(let i=0; i<items.length; i++){
       items[i].index = i;
@@ -54,7 +54,7 @@ class Accordion{
         if(auto) {
           buttons.forEach((c, i)=>{
             if(c.getAttribute("data-toggle-btn")=="true"){
-              self_toggle.toggleClass(c.children[0].classList, "fa-plus", "fa-minus", false);
+              self_toggle.toggleClass(c.children[0].classList, cls[0], cls[1], false);
               c.setAttribute("data-toggle-btn", false);
               // c.nextElementSibling.style.display="none";
               contents[i].style.display="none";
@@ -65,7 +65,7 @@ class Accordion{
         }
         this.display = !this.display;
         btn.setAttribute("data-toggle-btn", this.display);
-        self_toggle.toggleClass(btn.children[0].classList, "fa-plus", "fa-minus", this.display);
+        self_toggle.toggleClass(btn.children[0].classList, cls[0], cls[1], this.display);
         content.style.display = this.display ? "block": "none";
       }
     }
@@ -73,5 +73,5 @@ class Accordion{
 }
 window.addEventListener("DOMContentLoaded", function(){
   let lists = document.querySelectorAll("[data-toggle-list]");
-  lists.forEach(c=>new Accordion(c, true, 2));
+  lists.forEach(c=>new Accordion(c, true, 2, ["fa-plus", "fa-minus"]));
 })
