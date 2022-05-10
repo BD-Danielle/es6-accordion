@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="./js/es6.accordion.js"></script>
+  <title>es6-accordion-horizontal</title>
+</head>
+<style>
+  .list .item button {
+    background: #303030;
+    width: 25% !important;
+    float: left;
+  }
+
+  .list .item div {
+    display: none;
+    clear: both;
+    position: absolute;
+    top: 50px;
+  }
+
+  ul {
+    list-style-type: none;
+    position: relative;
+  }
+</style>
+<script>
+  // window.addEventListener('DOMContentLoaded', function(){ new Accordion('[data-toggle-list]', true, 1); })
+</script>
+<body>
+  <div class="wrapper mx-auto mt-3 offset-top" style="max-width: 720px">
+    <h1 class="h1 text-center">常見問題解答</h1>
+    <ul class="list" data-toggle-list>
+      <li class="item" data-toggle-item>
+        <button data-toggle-btn class="w-100 p-3 d-flex justify-content-between text-white">Netflix 是什麼？<i
+            class="fas fa-plus"></i></button>
+        <div data-toggle-content class="content p-3">Netflix 是串流服務，透過數千種可連結網路的行動裝置，提供各種獲獎肯定的節目、電影、動畫、紀錄片等精彩內容。</div>
+      </li>
+      <li class="item" data-toggle-item>
+        <button data-toggle-btn class="w-100 p-3 d-flex justify-content-between text-white">Netflix 是什麼？<i
+            class="fas fa-plus"></i></button></button>
+        <div data-toggle-content class="content p-3">只要支付一筆固定月費，就能用您的智慧型手機、平板電腦、智慧型電視、筆記型電腦或串流裝置觀賞 Netflix。各種方案介於每月 $270
+          至 $390。無額外費用，不須綁約。</div>
+      </li>
+      <li class="item" data-toggle-item>
+        <button data-toggle-btn class="w-100 p-3 d-flex justify-content-between text-white">在哪裡觀賞？<i
+            class="fas fa-plus"></i></button></button>
+        <div data-toggle-content class="content p-3">在不限數量的裝置上隨時隨地觀賞。登入您的 Netflix 帳戶，就能使用您的個人電腦，或是提供 Netflix App
+          的任何可上網行動裝置，在 netflix.com 網站上即時觀賞，包括智慧型電視、智慧型手機、平板電腦、串流媒體播放器和遊戲機。<br><br>您也能使用 iOS、Android 或 Windows 10 App
+          下載最喜歡的節目。使用下載功能，就能在外出且沒有網路連線時觀賞。Netflix 時時帶著走。</div>
+      </li>
+      <li class="item" data-toggle-item>
+        <button data-toggle-btn class="w-100 p-3 d-flex justify-content-between text-white">如何取消？<i
+            class="fas fa-plus"></i></button></button>
+        <div data-toggle-content class="content p-3">Netflix 彈性十足。沒有難懂的合約，也不須綁約。點個兩下，就能線上輕鬆取消您的帳戶。無取消費用，可隨時開始或停用您的帳戶。
+        </div>
+      </li>
+    </ul>
+  </div>
+</body>
+
+</html>
