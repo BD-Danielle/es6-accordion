@@ -21,12 +21,13 @@ var Accordion = function () {
     var auto = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
     var cls = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : ["fa-plus", "fa-minus"];
+    var collapsible = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
 
     _classCallCheck(this, Accordion);
 
     self_toggle = this;
     this.selector = selector;
-    this.play(auto, index, cls);
+    this.play(auto, index, cls, collapsible);
   }
 
   _createClass(Accordion, [{
@@ -42,7 +43,7 @@ var Accordion = function () {
     }
   }, {
     key: "play",
-    value: function play(auto, index, cls) {
+    value: function play(auto, index, cls, collapsible) {
       var btn = void 0,
           content = void 0,
           buttons = void 0,
@@ -67,6 +68,7 @@ var Accordion = function () {
         items[i].onclick = function () {
           var _this = this;
 
+          if (this.display == true && this.display == !collapsible) return;
           btn = this.children[0];
           content = this.children[1];
           if (auto) {
@@ -74,10 +76,8 @@ var Accordion = function () {
               if (c.getAttribute("data-toggle-btn") == "true") {
                 self_toggle.toggleClass(c.children[0].classList, cls[0], cls[1], false);
                 c.setAttribute("data-toggle-btn", false);
-                // c.nextElementSibling.style.display="none";
-                contents[i].style.display = "none";
-                // c.parentNode.display=this.display;
-                items[i].display = _this.display;
+                contents[i].style.display = "none"; // c.nextElementSibling.style.display="none";
+                items[i].display = _this.display; // c.parentNode.display=this.display;
               }
             });
           }
@@ -107,10 +107,3 @@ var Accordion = function () {
 
   return Accordion;
 }();
-
-window.addEventListener("DOMContentLoaded", function () {
-  var lists = document.querySelectorAll("[data-toggle-list]");
-  lists.forEach(function (c) {
-    return new Accordion(c, true, 2, ["fa-plus", "fa-minus"]);
-  });
-});
