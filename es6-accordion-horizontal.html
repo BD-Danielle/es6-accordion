@@ -31,9 +31,13 @@
   }
 </style>
 <script>
-  // window.addEventListener('DOMContentLoaded', function(){ new Accordion('[data-toggle-list]', true, 1); })
+  window.addEventListener("DOMContentLoaded", function(){
+    let lists = document.querySelectorAll("[data-toggle-list]");
+    lists.forEach(c=>new Accordion(c, true, 1, ["fa-plus", "fa-minus"], false));
+  })
 </script>
 <body>
+  <h1 class="text-center text-danger">content不可收合設定collapsible=false</h1>
   <div class="wrapper mx-auto mt-3 offset-top" style="max-width: 720px">
     <h1 class="h1 text-center">常見問題解答</h1>
     <ul class="list" data-toggle-list>
@@ -43,7 +47,7 @@
         <div data-toggle-content class="content p-3">Netflix 是串流服務，透過數千種可連結網路的行動裝置，提供各種獲獎肯定的節目、電影、動畫、紀錄片等精彩內容。</div>
       </li>
       <li class="item" data-toggle-item>
-        <button data-toggle-btn class="w-100 p-3 d-flex justify-content-between text-white">Netflix 是什麼？<i
+        <button data-toggle-btn class="w-100 p-3 d-flex justify-content-between text-white">Netflix 費用？<i
             class="fas fa-plus"></i></button></button>
         <div data-toggle-content class="content p-3">只要支付一筆固定月費，就能用您的智慧型手機、平板電腦、智慧型電視、筆記型電腦或串流裝置觀賞 Netflix。各種方案介於每月 $270
           至 $390。無額外費用，不須綁約。</div>

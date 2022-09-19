@@ -25,9 +25,13 @@
   }
 </style>
 <script>
-  // window.addEventListener('DOMContentLoaded', function(){ new Accordion('[data-toggle-list]', true, 1); })
+  window.addEventListener("DOMContentLoaded", function(){
+    let lists = document.querySelectorAll("[data-toggle-list]");
+    lists.forEach(c=>new Accordion(c, true, 1, ["fa-plus", "fa-minus"]));
+  })
 </script>
 <body>
+  <h1 class="text-center text-danger">content可以收合</h1>
   <div class="wrapper mx-auto mt-3 offset-top" style="max-width: 720px">
     <h1 class="h1 text-center">常見問題解答</h1>
     <ul class="list" data-toggle-list>
