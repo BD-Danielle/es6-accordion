@@ -8,10 +8,10 @@
  * see README.md
  * ========================================================================
  */
-let self_toggle;
+var selfToggle;
 class Accordion{
   constructor(selector, auto=false, index=0, cls=["fa-plus", "fa-minus"], collapsible=true){
-    self_toggle = this;
+    selfToggle = this;
     this.selector = selector;
     this.play(auto, index, cls, collapsible);
   }
@@ -54,7 +54,7 @@ class Accordion{
         if(auto) {
           buttons.forEach((c, i)=>{
             if(c.getAttribute("data-toggle-btn")=="true"){
-              self_toggle.toggleClass(c.children[0].classList, cls[0], cls[1], false);
+              selfToggle.toggleClass(c.children[0].classList, cls[0], cls[1], false);
               c.setAttribute("data-toggle-btn", false);
               contents[i].style.display="none"; // c.nextElementSibling.style.display="none";
               items[i].display=this.display; // c.parentNode.display=this.display;
@@ -63,7 +63,7 @@ class Accordion{
         }
         this.display = !this.display;
         btn.setAttribute("data-toggle-btn", this.display);
-        self_toggle.toggleClass(btn.children[0].classList, cls[0], cls[1], this.display);
+        selfToggle.toggleClass(btn.children[0].classList, cls[0], cls[1], this.display);
         content.style.display = this.display ? "block": "none";
       }
     }
