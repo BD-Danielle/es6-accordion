@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-  <script src="./js/es6.accordion.js"></script>
+  <script src="./js/ai.es6.accordion-1.js"></script>
   <title>es6-accordion-horizontal</title>
 </head>
 <style>
@@ -33,7 +33,13 @@
 <script>
   window.addEventListener("DOMContentLoaded", function(){
     let lists = document.querySelectorAll("[data-toggle-list]");
-    lists.forEach(c=>new Accordion(c, true, 1, ["fa-plus", "fa-minus"], false));
+    lists.forEach(c=>new Accordion({
+      selector: c, 
+      auto: true, // 可選，是否啟用自動切換
+      index: 4, // 可選，初始展開的項目索引（從 1 開始）
+      cls: ["fa-plus", "fa-minus"], // 可選，按鈕圖示的 CSS 類名
+      collapsible: false // 可選，是否可折疊
+    }));
   })
 </script>
 <body>
@@ -48,20 +54,20 @@
       </li>
       <li class="item" data-toggle-item>
         <button data-toggle-btn class="w-100 p-3 d-flex justify-content-between text-white">Netflix 費用？<i
-            class="fas fa-plus"></i></button></button>
+            class="fas fa-plus"></i></button>
         <div data-toggle-content class="content p-3">只要支付一筆固定月費，就能用您的智慧型手機、平板電腦、智慧型電視、筆記型電腦或串流裝置觀賞 Netflix。各種方案介於每月 $270
           至 $390。無額外費用，不須綁約。</div>
       </li>
       <li class="item" data-toggle-item>
         <button data-toggle-btn class="w-100 p-3 d-flex justify-content-between text-white">在哪裡觀賞？<i
-            class="fas fa-plus"></i></button></button>
+            class="fas fa-plus"></i></button>
         <div data-toggle-content class="content p-3">在不限數量的裝置上隨時隨地觀賞。登入您的 Netflix 帳戶，就能使用您的個人電腦，或是提供 Netflix App
           的任何可上網行動裝置，在 netflix.com 網站上即時觀賞，包括智慧型電視、智慧型手機、平板電腦、串流媒體播放器和遊戲機。<br><br>您也能使用 iOS、Android 或 Windows 10 App
           下載最喜歡的節目。使用下載功能，就能在外出且沒有網路連線時觀賞。Netflix 時時帶著走。</div>
       </li>
       <li class="item" data-toggle-item>
         <button data-toggle-btn class="w-100 p-3 d-flex justify-content-between text-white">如何取消？<i
-            class="fas fa-plus"></i></button></button>
+            class="fas fa-plus"></i></button>
         <div data-toggle-content class="content p-3">Netflix 彈性十足。沒有難懂的合約，也不須綁約。點個兩下，就能線上輕鬆取消您的帳戶。無取消費用，可隨時開始或停用您的帳戶。
         </div>
       </li>
