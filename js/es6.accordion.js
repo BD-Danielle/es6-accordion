@@ -1,6 +1,6 @@
 /*
  * ========================================================================
- * Accordion 1.1
+ * Accordion 1.2.0
  * toggle component
  * YILING CHEN.
  * Copyright 2022, MIT License
@@ -8,64 +8,88 @@
  * see README.md
  * ========================================================================
  */
-var selfToggle;
-class Accordion{
-  constructor(selector, auto=false, index=0, cls=["fa-plus", "fa-minus"], collapsible=true){
-    selfToggle = this;
+
+class Accordion {
+  constructor(options) {
+    const {
+      selector,
+      auto = true,
+      index = 0,
+      cls = ["fa-plus", "fa-minus"],
+      collapsible = true
+    } = options;
+
     this.selector = selector;
-    this.play(auto, index, cls, collapsible);
+    this.auto = auto;
+    this.index = index;
+    this.cls = cls ?? ['a', 'b'];
+    this.collapsible = collapsible;
+
+    this.initialize();
   }
-  get items(){
+
+  get items() {
     return this.selector.querySelectorAll("[data-toggle-item]");
   }
-  get buttons(){
+
+  get buttons() {
     return this.selector.querySelectorAll("[data-toggle-btn]");
   }
-  get contents(){
+
+  get contents() {
     return this.selector.querySelectorAll("[data-toggle-content]");
   }
-  toggleClass(classList, a, b, bool){
-    if(bool){
+
+  toggleClass(classList, bool) {
+    const [a, b] = this.cls;
+    if (bool) {
       classList.add(b);
       classList.remove(a);
-      return;
+    } else {
+      classList.add(a);
+      classList.remove(b);
     }
-    classList.add(a);
-    classList.remove(b);
   }
-  play(auto, index, cls, collapsible){
-    let btn, content, buttons, contents, items;
-    contents = this.contents;
-    buttons = this.buttons;
-    items = this.items;
-    items.forEach(c=>c.display=false);
-    buttons.forEach(c=>c.setAttribute("data-toggle-btn", false));
-    if(!!index) {
-      items[index-1].display=true;
-      buttons[index-1].setAttribute("data-toggle-btn", items[index-1].display);
-      contents[index-1].style.display=items[index-1].display? "block": "none";
-      this.toggleClass(buttons[index-1].children[0].classList, cls[0], cls[1], items[index-1].display);
+
+  initialize() {
+    const contents = this.contents;
+    const buttons = this.buttons;
+    const items = this.items;
+    items.forEach((item) => (item.display = false));
+    buttons.forEach((button) => button.setAttribute("data-toggle-btn", false));
+
+    if (this.index >= 0 && this.index <= items.length) {
+      const item = items[this.index];
+      item.display = true;
+      buttons[this.index].setAttribute("data-toggle-btn", item.display);
+      contents[this.index].style.display = item.display ? "block" : "none";
+      this.toggleClass(buttons[this.index].children[0].classList, item.display);
     }
-    for(let i=0; i<items.length; i++){
-      items[i].onclick=function(){
-        if(this.display == true && this.display == !collapsible) return;
-        btn = this.children[0];
-        content = this.children[1];
-        if(auto) {
-          buttons.forEach((c, i)=>{
-            if(c.getAttribute("data-toggle-btn")=="true"){
-              selfToggle.toggleClass(c.children[0].classList, cls[0], cls[1], false);
-              c.setAttribute("data-toggle-btn", false);
-              contents[i].style.display="none"; // c.nextElementSibling.style.display="none";
-              items[i].display=this.display; // c.parentNode.display=this.display;
+
+    items.forEach((item) => {
+      item.onclick = () => {
+        if (item.display && item.display === !this.collapsible) return;
+
+        const button = item.children[0];
+        const content = item.children[1];
+
+        if (this.auto) {
+          buttons.forEach((btn, i) => {
+            if (btn.getAttribute("data-toggle-btn") === "true") {
+              this.toggleClass(btn.children[0].classList, false);
+              btn.setAttribute("data-toggle-btn", false);
+              contents[i].style.display = "none";
+              items[i].display = item.display;
             }
-          })
+          });
         }
-        this.display = !this.display;
-        btn.setAttribute("data-toggle-btn", this.display);
-        selfToggle.toggleClass(btn.children[0].classList, cls[0], cls[1], this.display);
-        content.style.display = this.display ? "block": "none";
-      }
-    }
+
+        item.display = !item.display;
+        button.setAttribute("data-toggle-btn", item.display);
+        this.toggleClass(button.children[0].classList, item.display);
+        content.style.display = item.display ? "block" : "none";
+      };
+    });
   }
 }
+window.Accordion = Accordion;
