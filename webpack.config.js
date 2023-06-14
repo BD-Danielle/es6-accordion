@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production', //development
   entry: './js/es6.accordion.js',
   output: {
     path: path.resolve(__dirname, './js/webpack'),
