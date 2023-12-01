@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   <script src="./js/webpack/es6.accordion.bundle.js"></script>
+  <!-- <script src="./js/es6.accordion1.2.1.js"></script> -->
   <title>es6-accordion-horizontal</title>
 </head>
 <style>
@@ -31,10 +32,10 @@
   }
 </style>
 <script>
-  window.addEventListener("DOMContentLoaded", function(){
+  window.addEventListener("DOMContentLoaded", function () {
     let lists = document.querySelectorAll("[data-toggle-list]");
-    lists.forEach(c=>new Accordion({
-      selector: c, 
+    lists.forEach(c => new Accordion({
+      selector: c,
       //auto: true, // 可選，是否啟用自動切換（預設是 true）
       index: 1, // 可選，初始展開的項目索引（預設從 0 開始，如果超過遍歷長度，則返回 0）
       //cls: null, // 可選，按鈕圖示的 CSS 類名（預設是 ["fa-plus", "fa-minus"], 如填 nul l則不會遍歷 className）
@@ -42,6 +43,7 @@
     }));
   })
 </script>
+
 <body>
   <h1 class="text-center text-danger">content不可收合設定collapsible=false</h1>
   <div class="wrapper mx-auto mt-3 offset-top" style="max-width: 720px">

@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   mode: 'production', //development
-  entry: './js/es6.accordion.js',
+  entry: './js/es6.accordion1.2.1.js',
   output: {
     path: path.resolve(__dirname, './js/webpack'),
     filename: 'es6.accordion.bundle.js'
