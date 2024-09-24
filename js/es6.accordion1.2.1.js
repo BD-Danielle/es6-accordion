@@ -14,7 +14,7 @@ class Accordion {
     const {
       selector,
       auto = true,
-      index = 0,
+      index = null,
       cls = ["fa-plus", "fa-minus"],
       collapsible = true
     } = options;
@@ -56,17 +56,28 @@ class Accordion {
     const buttons = this.buttons;
     const contents = this.contents;
 
-    if (this.index < 0 || this.index >= items.length) {
-      // If index is out of bounds, reset to 0
-      this.index = 0;
+    if (this.index !== null && (this.index < 0 || this.index >= items.length)) {
+      // 如果 index 超出範圍，重設為 null，表示所有項目關閉
+      this.index = null;
     }
-    const item = items[this.index];
-    item.display = true;
-    buttons[this.index].setAttribute("data-toggle-btn", item.display);
-    contents[this.index].style.display = item.display ? "block" : "none";
-    this.toggleClass(buttons[this.index].children[0].classList, item.display);
-    
+    // 初始化所有手風琴項為關閉狀態
+    items.forEach((item, i) => {
+      item.display = false;
+      buttons[i].setAttribute("data-toggle-btn", item.display);
+      contents[i].style.display = "none";
+      this.toggleClass(buttons[i].children[0].classList, item.display);
+    });
 
+    // 如果傳入的 index 是有效的，打開對應的手風琴項
+    if (this.index !== null) {
+      const item = items[this.index];
+      item.display = true;
+      buttons[this.index].setAttribute("data-toggle-btn", item.display);
+      contents[this.index].style.display = item.display ? "block" : "none";
+      this.toggleClass(buttons[this.index].children[0].classList, item.display);
+    }
+
+    // 綁定點擊事件
     items.forEach((item) => {
       const button = item.children[0];
       const content = item.children[1];
@@ -95,12 +106,3 @@ class Accordion {
 }
 
 window.Accordion = Accordion;
-
-// Usage example
-const myAccordion = new Accordion({
-  selector: document.getElementById("data-toggle-list"),
-  auto: true, // Optional, whether to enable automatic switching (default is true)
-  index: 9, // Optional, initial expanded item index (default starts from 0, returns 0 if the traversal length or -1 is exceeded)
-  cls: ["fa-plus", "fa-minus"],  //Optional, the CSS class name of the button icon (the default is ["fa-plus", "fa-minus"], if null is filled in, the className will not be traversed)
-  collapsible: true, // Optional, whether it is foldable or not
-});
