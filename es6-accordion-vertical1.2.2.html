@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="./js/webpack/es6.accordion.bundle1.2.2.js"></script>
+  <!-- <script src="./js/es6.accordion1.2.2.js"></script> -->
+  <title>es6-accordion</title>
+</head>
+<style>
+  .list .item button {
+    background: #303030;
+  }
+
+  .list .item div {
+    display: none;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function(){
+    // 取得手風琴組件的容器元素, 確保頁面有其它手風琴組件
+    const accordionContainer = document.querySelectorAll('[data-accordion-list]');
+  
+    // 實例化Accordion組件
+    accordionContainer.forEach(container => {
+      const accordion = new Accordion({
+        container: container, // 傳入容器元素
+        autoCollapse: true, // 自動摺疊其他項
+        defaultOpenIndex: null, // 預設展開第一個項
+        toggleIcons: ["fa-plus", "fa-minus"], // 使用FontAwesome的加號和減號圖標
+        allowCollapseAll: true, // 允許所有項折疊
+        onToggleItem: (index, isOpen) => {
+          console.log(`Section ${index + 1} is now ${isOpen ? 'open' : 'closed'}.`);
+        },
+        onItemOpen: (index) => {
+          console.log(`Section ${index + 1} has been opened.`);
+        },
+        onItemClose: (index) => {
+          console.log(`Section ${index + 1} has been closed.`);
+        }
+      });
+      // 動態新增新的手風琴項
+      accordion.addItem(`
+        <div data-accordion-item>
+          <div data-accordion-button>
+            <span class="fa fa-plus"></span> New Section
+          </div>
+          <div data-accordion-content>
+            Content for the new section.
+          </div>
+        </div>
+      `);
+    
+      // 動態移除第一個手風琴項
+      accordion.removeItem(0);
+    })
+  })
+</script>
+
+<body>
+  <h1 class="text-center text-danger">content可以收合</h1>
+  <div class="wrapper mx-auto mt-3 offset-top" style="max-width: 720px">
+    <h1 class="h1 text-center">常見問題解答</h1>
+    <ul class="list" data-accordion-list>
+      <li class="item" data-accordion-item>
+        <button data-accordion-button class="w-100 p-3 d-flex justify-content-between text-white">Netflix 是什麼？<i
+            class="fas fa-plus"></i></button>
+        <div data-accordion-content class="content p-3">Netflix 是串流服務，透過數千種可連結網路的行動裝置，提供各種獲獎肯定的節目、電影、動畫、紀錄片等精彩內容。</div>
+      </li>
+      <li class="item" data-accordion-item>
+        <button data-accordion-button class="w-100 p-3 d-flex justify-content-between text-white">Netflix 是什麼？<i
+            class="fas fa-plus"></i></button></button>
+        <div data-accordion-content class="content p-3">只要支付一筆固定月費，就能用您的智慧型手機、平板電腦、智慧型電視、筆記型電腦或串流裝置觀賞 Netflix。各種方案介於每月 $270
+          至 $390。無額外費用，不須綁約。</div>
+      </li>
+      <li class="item" data-accordion-item>
+        <button data-accordion-button class="w-100 p-3 d-flex justify-content-between text-white">在哪裡觀賞？<i
+            class="fas fa-plus"></i></button></button>
+        <div data-accordion-content class="content p-3">在不限數量的裝置上隨時隨地觀賞。登入您的 Netflix 帳戶，就能使用您的個人電腦，或是提供 Netflix App
+          的任何可上網行動裝置，在 netflix.com 網站上即時觀賞，包括智慧型電視、智慧型手機、平板電腦、串流媒體播放器和遊戲機。<br><br>您也能使用 iOS、Android 或 Windows 10 App
+          下載最喜歡的節目。使用下載功能，就能在外出且沒有網路連線時觀賞。Netflix 時時帶著走。</div>
+      </li>
+      <li class="item" data-accordion-item>
+        <button data-accordion-button class="w-100 p-3 d-flex justify-content-between text-white">如何取消？<i
+            class="fas fa-plus"></i></button></button>
+        <div data-accordion-content class="content p-3">Netflix 彈性十足。沒有難懂的合約，也不須綁約。點個兩下，就能線上輕鬆取消您的帳戶。無取消費用，可隨時開始或停用您的帳戶。
+        </div>
+      </li>
+      <li class="item" data-accordion-item>
+        <button data-accordion-button class="w-100 p-3 d-flex justify-content-between text-white">可以在 Netflix 觀賞什麼內容？<i
+            class="fas fa-plus"></i></button></button>
+        <div data-accordion-content class="content p-3">Netflix 擁有豐富的影片內容庫，包括長片、紀錄片、節目、動畫、獲獎肯定的 Netflix
+          原創作品與更多內容。隨時隨地，盡情觀賞。</div>
+      </li>
+    </ul>
+
+    <h1 class="h1 text-center">常見問題解答2</h1>
+    <ul class="list" data-accordion-list>
+      <li class="item" data-accordion-item>
+        <button data-accordion-button class="w-100 p-3 d-flex justify-content-between text-white">YouTube 是什麼？<i
+            class="fas fa-plus"></i></button>
+        <div data-accordion-content class="content p-3">源自美國的影片分享網站，也是目前全球最大的影片搜尋和分享平臺，讓使用者上載、觀看、分享及評論影片。</div>
+      </li>
+      <li class="item" data-accordion-item>
+        <button data-accordion-button class="w-100 p-3 d-flex justify-content-between text-white">可以在 YouTube 觀賞什麼內容？<i
+            class="fas fa-plus"></i></button></button>
+        <div data-accordion-content class="content p-3">您的智慧型手機、平板電腦、智慧型電視、筆記型電腦或串流裝置觀賞 Netflix。各種方案介於每月 $270 至
+          $390。無額外費用，不須綁約。</div>
+      </li>
+      <li class="item" data-accordion-item>
+        <button data-accordion-button class="w-100 p-3 d-flex justify-content-between text-white">在哪裡觀賞？<i
+            class="fas fa-plus"></i></button></button>
+        <div data-accordion-content class="content p-3">
+          2007年6月19日，YouTube於巴黎宣布開始拓展全球在地化服務，第一波首先推出10種語言版本。在台灣出生的創辦人之一陳士駿於2007年10月回到故鄉，並宣布正式成立台灣中文版YouTube。</div>
+      </li>
+    </ul>
+  </div>
+</body>
+
+</html>
